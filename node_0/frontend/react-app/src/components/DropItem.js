@@ -4,7 +4,9 @@ import eth_image from "../assets/eth_image.png"
 import fantom_image from "../assets/fantom_image.png";
 import polygon_image from "../assets/polygon_image.png";
 import binance_image from "../assets/Binance_Logo.png";
-import {ethID, fantomID,binanceID} from "../contractApi/chainIDs";
+import avalanche_image from "../assets/avalanche_image.png";
+import error from "../assets/error.png";
+import {ethID, fantomID,binanceID,polygonID,avalancheID} from "../contractApi/chainIDs";
 
 import "../scss/custom.scss"
 
@@ -24,9 +26,15 @@ function DropItem(props){
             case binanceID:
                 name = "Binance";
                 return binance_image;
-            default:
-                name = "Polygon"
+            case polygonID:
+                name = "Polygon";
                 return polygon_image;
+            case avalancheID:
+                name = "Avalanche";
+                return avalanche_image;
+            default:
+                name = "Invalid Chain ID";
+                return error;
         }
     }
 

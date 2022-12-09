@@ -55,6 +55,12 @@ var contractInstance;
                 case contractData.ethID:
                     callEthSender(msg,reciever);
                     break;
+                case contractData.polygonID:
+                    callPolygonSender(msg,reciever);
+                    break;
+                case contractData.avalancheID:
+                    callAvalancheSender(msg,reciever);
+                    break;
                 default:
                     console.log("Invalid Chain ID");
                     break;
@@ -89,6 +95,26 @@ var contractInstance;
             contractInstance = new ethers.Contract(senderAddress,senderAbi,wallet);
 
             var tx = await contractInstance.sendMsg(msg,contractData.ethID,reciever);
+            console.log(tx);
+        };
+
+        async function callPolygonSender(msg,reciever){
+            provider = new ethers.providers.JsonRpcProvider(contractData.polygonRPC);
+            [senderAddress,senderAbi] = contractData.getSenderContract(contractData.polygonID);
+            wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+            contractInstance = new ethers.Contract(senderAddress,senderAbi,wallet);
+
+            var tx = await contractInstance.sendMsg(msg,contractData.polygonID,reciever);
+            console.log(tx);
+        };
+
+        async function callAvalancheSender(msg,reciever){
+            provider = new ethers.providers.JsonRpcProvider(contractData.avalancheRPC);
+            [senderAddress,senderAbi] = contractData.getSenderContract(contractData.avalancheID);
+            wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+            contractInstance = new ethers.Contract(senderAddress,senderAbi,wallet);
+
+            var tx = await contractInstance.sendMsg(msg,contractData.avalancheID,reciever);
             console.log(tx);
         };
 

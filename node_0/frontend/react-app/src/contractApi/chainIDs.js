@@ -891,3 +891,19 @@ export function getNFTContract(chainID){
 	}
 }
 
+export function getRPC(chainID){
+	switch (chainID) {
+		case fantomID:
+			return fantomRPC;
+		case binanceID:
+			return binanceRPC;
+		case polygonID:
+			return polygonRPC;
+		case avalancheID:
+			return avalancheRPC;
+		case ethID:
+			return ethRPC;
+		default:
+			console.log("Invalid Chain ID");
+	}
+}

@@ -6,7 +6,7 @@ import {ethers,BigNumber, Contract} from "ethers";
 
 import * as contractContact from "../contractApi/chainIDs";
 import {useState} from 'react';
-import { callSender } from "../contractApi/executionCall";
+import { callSender, callReciever } from "../contractApi/executionCall";
 
 //test soldier data
 var testSoldier = {
@@ -16,7 +16,6 @@ var testSoldier = {
     "Rank" : "Lance Corporal",
     "Skills": "Marksman, Combat Medic",
   } 
-
   testSoldier = JSON.stringify(testSoldier);
   
 
@@ -25,13 +24,13 @@ var testSoldier = {
   const [reciever,setReciever] = useState(0);
   const [sender,setSender] = useState(0); 
 
+  //set up listners for proxy contracts
+  getproxyData();
   
   //utility function to put messagers in the logs section of the Sender
   function senderLogs(message){
     let sender = document.getElementById("senderLog");
-
-    sender.insertAdjacentHTML("beforeend",message + " <br>");
-    
+    sender.insertAdjacentHTML("beforeend",message + " <br>");    
   }
 
     //utility function to put messagers in the logs section of the Reciever
@@ -40,23 +39,12 @@ var testSoldier = {
     reciever.insertAdjacentHTML("beforeend",message + "<br>")
   }
 
+  async function clickHandler(){
 
-  //pull test soldier data from the metadat of the NFTs
-  // pick a random number from 1-10 and use that number to pull random soldier metadata from the contract
-  
-  // get the soldier data from the contract
-  var [NFTContractAddress, NFTContractABI] = contractContact.getNFTContract(contractContact.binanceID);
-  var NFTRPC = contractContact.binanceRPC;
-  var NFTContract = new ethers.Contract(NFTContractAddress, NFTContractABI, new ethers.providers.JsonRpcProvider(NFTRPC));
-
-  //get the soldier data from the contract
-  NFTContract.getMetaData(Math.floor(Math.random()*10)+1).then(function(result){
-    console.log(result);
-    testSoldier = result;
-  }); 
-
-
-   async function clickHandler(){
+    //get the soldier data from the contract
+    var [NFTContractAddress, NFTContractABI] = contractContact.getNFTContract(sender);
+    var NFTRPC = getRPC(sender);
+    var NFTContract = new ethers.Contract(NFTContractAddress, NFTContractABI, new ethers.providers.JsonRpcProvider(NFTRPC));
 
     //call again to change the pulled NFT
     NFTContract.getMetaData(Math.floor(Math.random()*10)+1).then(function(result){
@@ -84,6 +72,7 @@ var testSoldier = {
     //listen for messages from reciever
     recieverContract.on("NewMsg", (msg) => {
       recieverLogs("New Message Recieved: " + msg);
+      recieverContract.removeAllListeners();
     });
 
     var result = await callSender(testSoldier,reciever,recieverContractAddress);
@@ -91,19 +80,107 @@ var testSoldier = {
 
 
   }
+
   function getRPC(chain) {
     switch (chain) {
       case contractContact.ethID:
         return contractContact.ethRPC;
+
       case contractContact.fantomID:
         return contractContact.fantomRPC;
+
       case contractContact.binanceID:
         return contractContact.binanceRPC;
+
+      case contractContact.polygonID:
+        return contractContact.polygonRPC;
+
+      case contractContact.avalancheID:
+        return contractContact.avalancheRPC;
+
       default:
         console.log("Invalid Chain ID");
         break;
   }
   }
+
+  async function getproxyData(){
+    console.log("proxy listners started");
+
+    // fetch the proxy contract
+    // currently only works for fantom and only listening to fantom
+
+    // fantom proxy setup
+    var [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.fantomID);
+    console.log("listening too proxy address: " + proxyAddress)
+    var proxyContractFantom = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.fantomRPC));
+
+    //listen for proxyCall sent from proxy
+
+    proxyContractFantom.on("ProxyCall", (to, data, chain) => {
+        console.log("Sent Message: " + to + " "+ data + " "+ chain);
+        chain = contractContact.fantomID;
+        callReciever(chain,data);
+        
+    });
+
+    // binance proxy setup
+    [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.binanceID);
+    console.log("listening too proxy address: " + proxyAddress)
+    var proxyContractBinance = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.binanceRPC));
+
+    //listen for proxyCall sent from proxy
+
+    proxyContractBinance.on("ProxyCall", (to, data, chain) => {
+        console.log("Sent Message: " + to + " "+ data + " "+ chain);
+        chain = contractContact.binanceID;
+        callReciever(chain,data);
+        
+    });
+
+
+    // eth proxy setup
+    [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.ethID);
+    console.log("listening too proxy address: " + proxyAddress)
+    var proxyContractEth = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.ethRPC));
+
+    //listen for proxyCall sent from proxy
+
+    proxyContractEth.on("ProxyCall", (to, data, chain) => {
+        console.log("Sent Message: " + to + " "+ data + " "+ chain);
+        chain = contractContact.ethID;
+        callReciever(chain,data);
+        
+    });   
+
+    // polygon proxy setup
+    [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.polygonID);
+    console.log("listening too proxy address: " + proxyAddress);
+    var proxyContractPolygon = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.polygonRPC));
+
+    //listen for proxyCall sent from proxy
+
+    proxyContractPolygon.on("ProxyCall", (to, data, chain) => {
+        console.log("Sent Message: " + to + " "+ data + " "+ chain);
+        chain = contractContact.polygonID;
+        callReciever(chain,data);   
+    });
+
+    // avalanche proxy setup
+    [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.avalancheID);
+    console.log("listening too proxy address: " + proxyAddress);
+    var proxyContractAvalanche = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.avalancheRPC));
+
+    //listen for proxyCall sent from proxy
+
+    proxyContractAvalanche.on("ProxyCall", (to, data, chain) => {
+        console.log("Sent Message: " + to + " "+ data + " "+ chain);
+        chain = contractContact.avalancheID;
+        callReciever(chain,data);   
+    });
+
+    
+};
   
   return (
     <Container
@@ -129,9 +206,10 @@ var testSoldier = {
                 <Dropdown.Menu>
                    <Dropdown.Item onClick={e => setSender(contractContact.ethID)}>Ethereum</Dropdown.Item> 
                    {/* Zero right now since we dont have polygon set up */}
-                  <Dropdown.Item onClick={e => setSender(0)}>Polygon</Dropdown.Item>
+                  <Dropdown.Item onClick={e => setSender(contractContact.polygonID)}>Polygon</Dropdown.Item>
                   <Dropdown.Item onClick={e => setSender(contractContact.fantomID)}>Fantom</Dropdown.Item> 
                   <Dropdown.Item onClick={e => setSender(contractContact.binanceID)}>Binance</Dropdown.Item>
+                  <Dropdown.Item onClick={e => setSender(contractContact.avalancheID)}>Avalanche</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Container>
@@ -176,9 +254,10 @@ var testSoldier = {
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={e => setReciever(contractContact.ethID)}>Ethereum</Dropdown.Item>
                   {/* look at above set sender for why this is zero */}
-                  <Dropdown.Item onClick={e => setReciever(0)}>Polygon</Dropdown.Item>
+                  <Dropdown.Item onClick={e => setReciever(contractContact.polygonID)}>Polygon</Dropdown.Item>
                   <Dropdown.Item onClick={e => setReciever(contractContact.fantomID)}>Fantom</Dropdown.Item> 
                   <Dropdown.Item onClick={e => setReciever(contractContact.binanceID)}>Binance</Dropdown.Item>
+                  <Dropdown.Item onClick={e => setReciever(contractContact.avalancheID)}>Avalanche</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Container>

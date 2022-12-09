@@ -900,6 +900,12 @@ module.exports = {
 	getProxyContract,
 	getSenderContract,
 	getRecieverContract,
-	getNFTContract
+	getNFTContract,
+	recieverContractABI,
+	fantomRPC,
+	binanceRPC,
+	ethRPC,
+	polygonRPC,
+	avalancheRPC
 };
 
