@@ -14,18 +14,19 @@ function DropItem(props){
     var picture;
     
     function getImage(){
-        if(props.image === ethID){
-            name = "Ethereum";
-           return eth_image;
-        }else if(props.image === fantomID){
-            name = "Fantom";
-           return fantom_image;
-        }else if(props.image === binanceID){
-            name = "Binance";
-           return binance_image;
-        }else{
-            name = "Polygon"
-            return polygon_image;
+        switch(props.image){
+            case ethID:
+                name = "Ethereum";
+                return eth_image;
+            case fantomID:
+                name = "Fantom";
+                return fantom_image;
+            case binanceID:
+                name = "Binance";
+                return binance_image;
+            default:
+                name = "Polygon"
+                return polygon_image;
         }
     }
 

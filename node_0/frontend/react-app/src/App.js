@@ -5,9 +5,7 @@ import {Transfer} from './components/Transfer';
 
 function App() {
   return (
-    <Transfer>
-
-    </Transfer>
+    <Transfer/>
   );
 }
 

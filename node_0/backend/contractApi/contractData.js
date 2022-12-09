@@ -4,32 +4,47 @@
 // 3. Contract Data helper functions
 
 
-//address exports and IDs
-export const ethID = 5;
-export const binanceID = 97;
-export const fantomID = 4002;
+//address s and IDs
+ const ethID = 5;
+ const binanceID = 97;
+ const fantomID = 4002;
+ const polygonID = 80001;
+ const avalancheID = 43113;
 
-export const fantomProxyAddress = '0x4a2369CcAd099f64802fb3e07b1107efa0F65Dca';
-export const fantomSenderAddress = '0x0397B1329267f80fbC28Fe7d902D74170d3E93D8';
-export const fantomRecieverAddress = '0x0966d9b13A69438F13106F37d2784428349577d3';
-export const fantomRPC = "https://rpc.testnet.fantom.network/";
-export const fantomNFTAddress = '0x4659ed40Fd2025eB1357A0B96ff0D7088F42B570';
+ const fantomProxyAddress = '0x4a2369CcAd099f64802fb3e07b1107efa0F65Dca';
+ const fantomSenderAddress = '0x0397B1329267f80fbC28Fe7d902D74170d3E93D8';
+ const fantomRecieverAddress = '0x0966d9b13A69438F13106F37d2784428349577d3';
+ const fantomRPC = "https://rpc.testnet.fantom.network/";
+ const fantomNFTAddress = '0x4659ed40Fd2025eB1357A0B96ff0D7088F42B570';
 
-export const binanceProxyAddress = '0x8187E7e848d95565BdC67F4ACd2A17B14692a616';
-export const binanceSenderAddress = '0x4a6c406995E6256065f481961F035B97942aCd5A';
-export const binanceRecieverAddress = '0x7FEB0e620fb77A1748A46709eDa61C1DB83DAAf2';
-export const binanceRPC = "https://data-seed-prebsc-1-s3.binance.org:8545";
-export const binanceNFTAddress = '0xd59c3D341411d20CC716dDfC7A7c5282795D79C2';
+ const binanceProxyAddress = '0x8187E7e848d95565BdC67F4ACd2A17B14692a616';
+ const binanceSenderAddress = '0x4a6c406995E6256065f481961F035B97942aCd5A';
+ const binanceRecieverAddress = '0x7FEB0e620fb77A1748A46709eDa61C1DB83DAAf2';
+ const binanceRPC = "https://data-seed-prebsc-1-s3.binance.org:8545";
+ const binanceNFTAddress = '0xd59c3D341411d20CC716dDfC7A7c5282795D79C2';
 
-export const ethProxyAddress = '0x018caC4Fc42E620042a3394f7976511DF03e6A04';
-export const ethSenderAddress = '0x6CAf2E5aB3878473bbfb6A72D1a621B7E5a1F4E8';
-export const ethRecieverAddress = '0x275888cE5c24C33D61382063486b9bEe60A5D104';
-export const ethRPC = "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161";
+ const ethProxyAddress = '0x018caC4Fc42E620042a3394f7976511DF03e6A04';
+ const ethSenderAddress = '0x6CAf2E5aB3878473bbfb6A72D1a621B7E5a1F4E8';
+ const ethRecieverAddress = '0x275888cE5c24C33D61382063486b9bEe60A5D104';
+ const ethRPC = "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161";
+ const ethNFTAddress = "0x0E4493082c65dEa4Be098fdF5452482e434d9FA4";
 
-//ABI exports
+ const polygonProxyAddress = '0x3dBEbc09a1F5D60e8412e4B9d66187f6Bc7DA0bE';
+ const polygonSenderAddress = '0x36d870F2EE0E1c69cadcf92A054F17Bf447C6745';
+ const polygonRecieverAddress = '0x1A9ae368Abe8e430819f301E0fD203FCF7B2821f';
+ const polygonRPC = "https://rpc-mumbai.maticvigil.com/";
+ const polygonNFTAddress = '0x560B93E3CD7D5d2Fd6035dE236216b56D57F4c67';
+
+ const avalancheProxyAddress = '0x95823646eCf9b4A45fA3301B5420B2a88De8a8d6';
+ const avalancheSenderAddress = '0xe65935Fec442634a60dF73449FfD39cb9968694d';
+ const avalancheRecieverAddress = '0x4fbCE169f6B538b30fBA0d645169A90B8926aa1E';
+ const avalancheRPC = "https://api.avax-test.network/ext/bc/C/rpc";
+ const avalancheNFTAddress = '0x1c4fB84F336aEB787f1a967aD83c64A8782FdA2d';
+
+//ABI s
 //List: senderContractABI, recieverContractABI, proxyContractABI
 
-export const NFTContractABI = [
+ const NFTContractABI = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -492,7 +507,7 @@ export const NFTContractABI = [
 	}
 ];
 
-export const senderContractABI = [
+ const senderContractABI = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -542,7 +557,7 @@ export const senderContractABI = [
 	}
 ]
 
-export const recieverContractABI = [
+ const recieverContractABI = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -575,7 +590,7 @@ export const recieverContractABI = [
 	}
 ]
 
-export const proxyContractABI = [
+ const proxyContractABI = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -709,56 +724,99 @@ export const proxyContractABI = [
 // fantom helper functions
 // getfantomProxy,getfantomSender,getfantomReceiver
 
-export function getFantomProxy(){
+ function getFantomProxy(){
 	return [fantomProxyAddress, proxyContractABI];
 }
 
-export function getFantomSender(){
+ function getFantomSender(){
 	return [fantomSenderAddress, senderContractABI];
 }
 
-export function getFantomReciever(){
+ function getFantomReciever(){
 	return [fantomRecieverAddress, recieverContractABI];
 }
-export function getFantomNFT(){
+ function getFantomNFT(){
 	return [fantomNFTAddress, NFTContractABI];
 }
 
 // binance helper functions
 // getbinanceProxy, getbinanceSender,getbinanceReceiver
 
-export function getBinanceProxy(){
+ function getBinanceProxy(){
 	return [binanceProxyAddress, proxyContractABI];
 }
 
-export function getBinanceSender(){
+ function getBinanceSender(){
 	return [binanceSenderAddress, senderContractABI];
 }
 
-export function getBinanceReciever(){
+ function getBinanceReciever(){
 	return [binanceRecieverAddress, recieverContractABI];
 }
-export function getBinanceNFT(){
+ function getBinanceNFT(){
 	return [binanceNFTAddress, NFTContractABI];
 }
 //Eth helper functions
 // getEthProxy, getEthSender,getEthReceiver
 
-export function getEthProxy(){
+ function getEthProxy(){
 	return [ethProxyAddress, proxyContractABI];
 }
 
-export function getEthSender(){
+ function getEthSender(){
 	return [ethSenderAddress, senderContractABI];
 }
 
-export function getEthReciever(){
+ function getEthReciever(){
 	return [ethRecieverAddress, recieverContractABI];
 }
 
+ function getEthNFT(){
+	return [ethNFTAddress, NFTContractABI];
+}
+
+// polygon helper functions
+// getPolygonProxy, getPolygonSender,getPolygonReceiver
+
+ function getPolygonProxy(){
+	return [polygonProxyAddress, proxyContractABI];
+}
+
+ function getPolygonSender(){
+	return [polygonSenderAddress, senderContractABI];
+}
+
+ function getPolygonReciever(){
+	return [polygonRecieverAddress, recieverContractABI];
+}
+
+ function getPolygonNFT(){
+	return [polygonNFTAddress, NFTContractABI];
+}
+
+// avalanche helper functions
+// getAvalancheProxy, getAvalancheSender,getAvalancheReceiver
+
+ function getAvalancheProxy(){
+	return [avalancheProxyAddress, proxyContractABI];
+}
+
+ function getAvalancheSender(){
+	return [avalancheSenderAddress, senderContractABI];
+}
+
+ function getAvalancheReciever(){
+	return [avalancheRecieverAddress, recieverContractABI];
+}
+
+ function getAvalancheNFT(){
+	return [avalancheNFTAddress, NFTContractABI];
+}
+
+
 // all getContract functions return the format of [address,abi]
 // gets the proxy contract address and ABI based on the chain ID passed in
-export function getProxyContract(chainID){
+ function getProxyContract(chainID){
     switch (chainID) {
         case fantomID:
             return getFantomProxy();
@@ -766,6 +824,10 @@ export function getProxyContract(chainID){
             return getBinanceProxy();
         case ethID:
             return getEthProxy();
+		case polygonID:
+			return getPolygonProxy();
+		case avalancheID:
+			return getAvalancheProxy();
         default:
             console.log("Invalid Chain ID");
             break;
@@ -773,7 +835,7 @@ export function getProxyContract(chainID){
 }
 
 // gets the sender contract address and ABI based on the chain ID passed in
-export function getSenderContract(chainID){
+ function getSenderContract(chainID){
     switch (chainID) {
         case fantomID:
             return getFantomSender();
@@ -781,6 +843,10 @@ export function getSenderContract(chainID){
             return getBinanceSender();
         case ethID:
             return getEthSender();
+		case polygonID:
+			return getPolygonSender();
+		case avalancheID:
+			return getAvalancheSender();
         default:
             console.log("Invalid Chain ID");
             break;;
@@ -789,7 +855,7 @@ export function getSenderContract(chainID){
 }
 
 //gets the reciever contract address and ABI based on the chain ID passed in
-export function getRecieverContract(chainID){
+ function getRecieverContract(chainID){
     switch (chainID) {
         case fantomID:
             return getFantomReciever();
@@ -797,21 +863,43 @@ export function getRecieverContract(chainID){
             return getBinanceReciever();
         case ethID:
             return getEthReciever();
+		case polygonID:
+			return getPolygonReciever();
+		case avalancheID:
+			return getAvalancheReciever();
         default:
             console.log("Invalid Chain ID");
             break;
     }
 }
 
-export function getNFTContract(chainID){
+ function getNFTContract(chainID){
 	switch (chainID) {
 		case fantomID:
 			return getFantomNFT();
 		case binanceID:
 			return getBinanceNFT();
+		case polygonID:
+			return getPolygonNFT();
+		case avalancheID:
+			return getAvalancheNFT();
+		case ethID:
+			return getEthNFT();
 		default:
 			console.log("Invalid Chain ID");
 			break;
 	}
 }
+
+module.exports = {
+	ethID,
+	fantomID,
+	binanceID,
+	polygonID,
+	avalancheID,
+	getProxyContract,
+	getSenderContract,
+	getRecieverContract,
+	getNFTContract
+};
 
