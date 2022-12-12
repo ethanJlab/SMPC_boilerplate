@@ -19,7 +19,7 @@ var testSoldier = {
   } 
   testSoldier = JSON.stringify(testSoldier);
   
-
+// possibly use props for solution
  export function Transfer() {
 
   const [reciever,setReciever] = useState(0);
