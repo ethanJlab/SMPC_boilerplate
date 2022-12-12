@@ -5,8 +5,9 @@ import DropItem from "./DropItem";
 import {ethers,BigNumber, Contract} from "ethers";
 
 import * as contractContact from "../contractApi/chainIDs";
-import {useState} from 'react';
+import {useState, useEffect, useCallback, useRef} from 'react';
 import { callSender, callReciever } from "../contractApi/executionCall";
+//import {setParentReceiver, setParentSender} from "../App";
 
 //test soldier data
 var testSoldier = {
@@ -23,7 +24,18 @@ var testSoldier = {
 
   const [reciever,setReciever] = useState(0);
   const [sender,setSender] = useState(0); 
+  const childRef = useRef();
+/*
+  // use passed in function from parent to set the sender
+  useEffect(() => {
+    setParentSender(sender);
+  }, [sender, setParentSender]);
 
+  // use passed in function from parent to set the reciever
+  useEffect(() => {
+    setParentReceiver(reciever);
+  }, [reciever, setParentReceiver]);
+*/
   //set up listners for proxy contracts
   getproxyData();
   
@@ -180,7 +192,17 @@ var testSoldier = {
     });
 
     
+
+    
 };
+
+// useEffect function that changes the parent state of the sender and reciever when the dropdown is changed
+/*
+  useEffect(() => {
+    setParentSender(sender);
+    setParentReciever(reciever);
+  }, [sender, reciever]);
+*/
   
   return (
     <Container

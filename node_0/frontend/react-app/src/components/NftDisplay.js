@@ -1,7 +1,8 @@
 // based on the chainID, this component will be used to display the NFTs from that blockchain
 // you can either display all NFTs, display a random NFT with index 1-10, or display a specific NFT by ID
 
-import { Container,Image, Stack, Form } from "react-bootstrap";
+import { useState, onClick} from "react";
+import { Container,Image, Stack, Form, Button} from "react-bootstrap";
 import {ethers} from "ethers"; 
 import {ethID, fantomID,binanceID,polygonID,avalancheID} from "../contractApi/chainIDs";
 import * as contractData from "../contractApi/chainIDs";
@@ -13,6 +14,20 @@ import avalanche_image from "../assets/avalanche_image.png";
 import error from "../assets/error.png";
 
 export function NftDisplay(props){
+
+    const [NFTID, setNFTID] = useState("");
+    const [NFTURI, setNFTURI] = useState("");
+
+    // handel the NFT ID input
+    function handleNFTID(event){
+        setNFTID(event.target.value);
+
+        displaySpecificNFT(NFTID).then((NFTURI) => {
+            setNFTURI(NFTURI);
+        });
+    };
+
+    
     // the props idntifier will contain the chainID
 
     // get the blockchain logo based on chainID
@@ -62,18 +77,62 @@ export function NftDisplay(props){
     };
 
     //function that returns a random NFT ID from index 1-10
-    async function getRandomNFTID(){
+    function getRandomNFTID(){
         var NFTID = Math.floor(Math.random() * 10) + 1;
         return NFTID;
     };
+
+    // button that displays a random NFT
+    async function displayRandomNFT(){
+        var NFTID = getRandomNFTID();
+        var NFTURI = await getNFTURI(NFTID);
+        return NFTURI;
+    };
+
+    // button that displays a specific NFT based on ID
+    async function displaySpecificNFT(NFTID){
+        var NFTURI = await getNFTURI(NFTID);
+        return NFTURI;
+    };
+
+/*
+    displayRandomNFT().then((result) => {
+        console.log(result);
+    });
+*/
+    // function for parsing the NFT URI
+    function parseNFTURI(NFTURI){
+        //replace all ' in the uri with "
+        NFTURI = NFTURI.replace(/'/g, '"');
+        NFTURI = NFTURI.replace(/TokenID:/g, '');
+        NFTURI = NFTURI.slice(2);
+        NFTURI = JSON.stringify(JSON.parse(NFTURI),null,1);
+        return NFTURI;
+    };
+
 
     return (
         // simple hello world text
         <Container>
                 <Container className="h5">
                 <Image src={blockchainLogo} roundedCircle width={60}/>
-                   <Container></Container>
-                </Container>            
+                <Button onClick={() => displayRandomNFT().then((NFTURI) => {
+                    setNFTURI(parseNFTURI(NFTURI));
+                })}>Display Random NFT</Button>
+                <Form>
+                    <input type="text" value={NFTID} placeholder="NFT ID" onChange={(e) => setNFTID(e.target.value)}/>
+                </Form>
+                <Button type="button" onClick={() => displaySpecificNFT(NFTID).then((NFTURI) => {
+                    setNFTURI(parseNFTURI(NFTURI));
+                })}>Display NFT</Button>
+                <br/>
+                
+                <div class="text" >
+                    <pre>
+                    {NFTURI}
+                    </pre>
+                </div>
+                </Container>         
         </Container>
     )
 }
