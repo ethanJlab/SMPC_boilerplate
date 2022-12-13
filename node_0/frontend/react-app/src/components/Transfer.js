@@ -1,4 +1,4 @@
-import { Dropdown, Container, Button, Stack,Form,InputGroup} from "react-bootstrap";
+import { Dropdown, Container, Button, Stack,Form,Image} from "react-bootstrap";
 import "../scss/custom.scss";
 
 import DropItem from "./DropItem";
@@ -8,6 +8,7 @@ import * as contractContact from "../contractApi/chainIDs";
 import {useState, useEffect, useCallback, useRef} from 'react';
 import { callSender, callReciever } from "../contractApi/executionCall";
 import * as once from "async-once";
+import transfer_gif from '../assets/logo_blockchainConnection_Seq_64.gif';
 //import {setParentReceiver, setParentSender} from "../App";
 
 //test soldier data
@@ -241,6 +242,8 @@ var testSoldier = {
           <Button variant="primary" className="d-flex justify-content-center" size="lg" onClick={e => clickHandler()}>
             Transfer
           </Button>
+          <Image src={transfer_gif}  style={{position:'absolute', top: "370px"}}/>
+
           
         </Container>
 
