@@ -1,0 +1,262 @@
+
+// generate a json similar to the ones above but with data of a hospital worker
+
+[
+    {
+        "FirstName": "John",
+        "LastName": "Doe",
+        "TokenID": "0x5ed9ee2a09efe86e669443ebf9dbd3972f39c2a2",
+        "Education": "Bachelor of Science in Nursing",
+        "Certifications": [
+            {
+                "Certified Pharmacy Technician (CPhT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            }
+        ],
+        "Experience": [
+            {
+                "Years": 5,
+                "Hospital": "Johns Hopkins Hospital"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Maryland Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "Jane",
+        "LastName": "Doe",
+        "TokenID":"0x6994c35caf5e6a8be967e5ef20096a3ac74e1d11",
+        "Education": "Bachelor of Science in Nursing",
+        "Certifications": [
+            {
+                "Certified Pharmacy Technician (CPhT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Security 5 Certification": true
+            }
+        ],
+        "Experience": [
+            {
+                "Years": 5,
+                "Hospital": "Washington Hospital Center"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Central Florida Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "William",
+        "LastName": "Smith",
+        "TokenID":"0x6994c35caf5e6a8be967e5ef20096a3ac74e1d11",
+        "Education": "Bachelor of Science in Dentistry",
+        "Certifications": [
+            {
+                "Certified X-Ray Technician (CXRT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Security 2 Certification": true
+            }
+        ],
+        "Experience": [
+            {
+                "Years": 5,
+                "Hospital": "New York Health Presbyterian"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Florida Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "Mary",
+        "LastName": "Smith",
+        "TokenID":"0x8974c35caf5e6a8be967e5ef20096a3ac74e1d11",
+        "Education": "Bachelor of Science in Physical Therapy",
+        "Certifications": [
+            {
+                "Certified Bone Saw Technician (CBST)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Security 21 Certification": true
+            }
+        ],
+        "Experience": [
+            {
+                "Years": 5,
+                "Hospital": "Texas Health Presbyterian"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Central Florida Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "James",
+        "LastName":"Nixon",
+        "TokenID":"0x5ed9ee2a09efe86e669443ebf9dbd3972f39c2a2",
+        "Education": "Doctor of Medicine",
+        "Certifications": [
+            {
+                "Certified Pharmacy Technician (CPhT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Certified X-Ray Technician (CXRT)": true
+            }
+        ],
+        "Experience":[
+            {
+                "Years": 5,
+                "Hospital": "Johns Hopkins Hospital"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Maryland Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "Sarah",
+        "LastName":"Nixon",
+        "TokenID":"0x5ed9ee2a09efe86e669443ebf9dbd3972f39c2a2",
+        "Education": "Doctor of Medicine",
+        "Certifications": [
+            {
+                "Certified Pharmacy Technician (CPhT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Certified X-Ray Technician (CXRT)": true
+            }
+        ],
+        "Experience":[
+            {
+                "Years": 5,
+                "Hospital": "Johns Hopkins Hospital"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Maryland Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "Robert",
+        "LastName":"Smith",
+        "TokenID":"0x6994c35caf5e6a8be967e5ef20096a3ac74e1d11",
+        "Education": "Bachelor of Science in Nursing",
+        "Certifications": [
+            {
+                "Certified Pharmacy Technician (CPhT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Security 5 Certification": true
+            }
+        ],
+        "Experience": [
+            {
+                "Years": 5,
+                "Hospital": "New Mexico Hospital Center"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Central Florida Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "Patricia",
+        "LastName":"Smith",
+        "TokenID":"0x2wdes5caf5e6a8be967e5ef20096a3ac74e1d11",
+        "Education": "Bachelor of Science in Psycotherapy",
+        "Certifications": [
+            {
+                "Licensed Psychologist": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Security 2 Certification": true
+            }
+        ]
+    },
+    {
+        "FirstName": "Richard",
+        "LastName":"Nixon",
+        "TokenID":"0x5ed9ee2a09efe86e669443ebf9dbd3972f39c2a2",
+        "Education": "Doctor of Medicine",
+        "Certifications": [
+            {
+                "Certified Pharmacy Technician (CPhT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Certified X-Ray Technician (CXRT)": true
+            }
+        ],
+        "Experience":[
+            {
+                "Years": 5,
+                "Hospital": "Johns Hopkins Hospital"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Maryland Medical Center"
+            }
+        ]
+    },
+    {
+        "FirstName": "Barbara",
+        "LastName":"Nixon",
+        "TokenID":"0x5ed9es2a09efe86e669443ebf9dbd3972f39c2a2",
+        "Education": "Doctor of Medicine",
+        "Certifications": [
+            {
+                "Certified Pharmacy Technician (CPhT)": true
+            },
+            {
+                "Adult and Pediatric First Aid/CPR/AED": true
+            },
+            {
+                "Certified X-Ray Technician (CXRT)": true
+            }
+        ],
+        "Experience":[
+            {
+                "Years": 5,
+                "Hospital": "Johns Hopkins Hospital"
+            },
+            {
+                "Years": 3,
+                "Hospital": "University of Maryland Medical Center"
+            }
+        ]
+    }
+]
