@@ -17,6 +17,7 @@ export function NftDisplay(props){
 
     const [NFTID, setNFTID] = useState("");
     const [NFTURI, setNFTURI] = useState("");
+    
 
     // handel the NFT ID input
     function handleNFTID(event){
@@ -27,8 +28,34 @@ export function NftDisplay(props){
         });
     };
 
+    // function that will read in the NFT ID and return the type of industry that is associated with the blockchain
+    var industry = getIndustry(props);
+    function getIndustry(props){
+        var industry;
+        switch (props.identifier){
+            case contractData.ethID:
+                industry = "Military";
+                break;
+            case contractData.fantomID:
+                industry = "Finance";
+                break;
+            case contractData.binanceID:
+                industry = "Healthcare";
+                break;
+            case contractData.polygonID:
+                industry = "Energy";
+                break;
+            case contractData.avalancheID:
+                industry = "Airforce";
+                break;
+            default:
+                industry = "Invalid Chain ID"; 
+                break;  
+        }             
+        return industry;        
+    };
     
-    // the props idntifier will contain the chainID
+    // the props identifier will contain the chainID
 
     // get the blockchain logo based on chainID
     var blockchainLogo = getImage(props);
@@ -47,7 +74,7 @@ export function NftDisplay(props){
             default:
                 return error;
         }
-    }
+    };
     // get the NFT address based on chainID
     var [NFTAddress,NFTContractABI] = getNftAddress(props);
     function getNftAddress(props){
@@ -120,6 +147,7 @@ export function NftDisplay(props){
         // simple hello world text
         <Container>
                 <Container className="h5">
+                <h1>Industry: {industry}</h1>
                 <Image src={blockchainLogo} roundedCircle width={60}/>
                 <Button onClick={() => displayRandomNFT().then((NFTURI) => {
                     setNFTURI(parseNFTURI(NFTURI));
