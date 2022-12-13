@@ -7,6 +7,7 @@ import {ethers,BigNumber, Contract} from "ethers";
 import * as contractContact from "../contractApi/chainIDs";
 import {useState, useEffect, useCallback, useRef} from 'react';
 import { callSender, callReciever } from "../contractApi/executionCall";
+import * as once from "async-once";
 //import {setParentReceiver, setParentSender} from "../App";
 
 //test soldier data
@@ -20,22 +21,23 @@ var testSoldier = {
   testSoldier = JSON.stringify(testSoldier);
   
 // possibly use props for solution
- export function Transfer() {
+ export function Transfer(props) {
 
-  const [reciever,setReciever] = useState(0);
-  const [sender,setSender] = useState(0); 
+  const [reciever,setCurrentReciever] = useState(0);
+  const [sender,setCurrentSender] = useState(0); 
   const childRef = useRef();
-/*
-  // use passed in function from parent to set the sender
-  useEffect(() => {
-    setParentSender(sender);
-  }, [sender, setParentSender]);
 
-  // use passed in function from parent to set the reciever
-  useEffect(() => {
-    setParentReceiver(reciever);
-  }, [reciever, setParentReceiver]);
-*/
+  function setSender(sender){
+    props.setParentSender(sender);
+    setCurrentSender(sender);
+  };
+
+  function setReciever(reciever){
+    props.setParentReceiver(reciever);
+    setCurrentReciever(reciever);
+  };
+
+
   //set up listners for proxy contracts
   getproxyData();
   
@@ -88,9 +90,6 @@ var testSoldier = {
     });
 
     var result = await callSender(testSoldier,reciever,recieverContractAddress);
-    
-
-
   }
 
   function getRPC(chain) {
@@ -120,7 +119,6 @@ var testSoldier = {
     console.log("proxy listners started");
 
     // fetch the proxy contract
-    // currently only works for fantom and only listening to fantom
 
     // fantom proxy setup
     var [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.fantomID);
@@ -190,25 +188,13 @@ var testSoldier = {
         chain = contractContact.avalancheID;
         callReciever(chain,data);   
     });
-
-    
-
     
 };
-
-// useEffect function that changes the parent state of the sender and reciever when the dropdown is changed
-/*
-  useEffect(() => {
-    setParentSender(sender);
-    setParentReciever(reciever);
-  }, [sender, reciever]);
-*/
   
   return (
     <Container
       fluid
-      className="border container-fluid d-flex justify-content-center m-3 p-5 "
-    >
+      className="border container-fluid d-flex justify-content-center m-3 p-5 ">
       <Stack direction="horizontal" gap={3}>
         <Container className="p-1">
           <Container>
@@ -226,8 +212,7 @@ var testSoldier = {
                  
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                   <Dropdown.Item onClick={e => setSender(contractContact.ethID)}>Ethereum</Dropdown.Item> 
-                   {/* Zero right now since we dont have polygon set up */}
+                  <Dropdown.Item onClick={e => setSender(contractContact.ethID)}>Ethereum</Dropdown.Item> 
                   <Dropdown.Item onClick={e => setSender(contractContact.polygonID)}>Polygon</Dropdown.Item>
                   <Dropdown.Item onClick={e => setSender(contractContact.fantomID)}>Fantom</Dropdown.Item> 
                   <Dropdown.Item onClick={e => setSender(contractContact.binanceID)}>Binance</Dropdown.Item>
@@ -256,7 +241,6 @@ var testSoldier = {
           <Button variant="primary" className="d-flex justify-content-center" size="lg" onClick={e => clickHandler()}>
             Transfer
           </Button>
-
           
         </Container>
 
@@ -275,7 +259,6 @@ var testSoldier = {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={e => setReciever(contractContact.ethID)}>Ethereum</Dropdown.Item>
-                  {/* look at above set sender for why this is zero */}
                   <Dropdown.Item onClick={e => setReciever(contractContact.polygonID)}>Polygon</Dropdown.Item>
                   <Dropdown.Item onClick={e => setReciever(contractContact.fantomID)}>Fantom</Dropdown.Item> 
                   <Dropdown.Item onClick={e => setReciever(contractContact.binanceID)}>Binance</Dropdown.Item>

@@ -7,7 +7,6 @@ import binance_image from "../assets/Binance_Logo.png";
 import avalanche_image from "../assets/avalanche_image.png";
 import error from "../assets/error.png";
 import {ethID, fantomID,binanceID,polygonID,avalancheID} from "../contractApi/chainIDs";
-
 import "../scss/custom.scss"
 
 function DropItem(props){

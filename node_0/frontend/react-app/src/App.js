@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import { Image, Stack } from 'react-bootstrap';
+import { Image, Stack, Container } from 'react-bootstrap';
 import './App.css';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {Transfer} from './components/Transfer';
@@ -8,7 +8,6 @@ import army_logo from './assets/logo_usArmy_64.png';
 import ucf_logo from './assets/logo_ucf_312.png';
 import * as contractData from "./contractApi/chainIDs";
 
-// todo: get the two chains that are being displayed in teh transfer component and only display the coresponding NFT components
 //todo: add industry spacific NFTs to each chain
 function App() {
   const [parentSender, setParentSender] = useState("");
@@ -16,11 +15,13 @@ function App() {
 
   // wrapper function to give to transfer component
   const handleSender = useCallback((sender) => {
+    console.log("parent Sender: " + sender);
     setParentSender(sender);
   }, [setParentSender]);
 
   // wrapper function to give to transfer component
   const handleReceiver = useCallback((receiver) => {
+    console.log("parent Receiver: " + receiver);
     setParentReceiver(receiver);
   }, [setParentReceiver]);
 
@@ -34,13 +35,12 @@ function App() {
         setParentSender={handleSender}
         parentReceiver={parentReceiver}
         setParentReceiver={handleReceiver}/>
-      <div className='rowC'>
-        <NftDisplay identifier={contractData.ethID}/>
-        <NftDisplay identifier={contractData.binanceID}/>
-        <NftDisplay identifier={contractData.fantomID}/>
-        <NftDisplay identifier={contractData.polygonID}/>
-        <NftDisplay identifier={contractData.avalancheID}/>
-      </div>    
+      <Container>
+        <div className='rowC'>
+          <NftDisplay identifier={parentSender}/>
+          <NftDisplay identifier={parentReceiver}/>
+        </div>   
+      </Container> 
     </div>
   );
 }
