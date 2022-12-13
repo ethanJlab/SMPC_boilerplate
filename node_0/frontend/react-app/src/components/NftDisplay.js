@@ -106,6 +106,11 @@ export function NftDisplay(props){
         NFTURI = NFTURI.replace(/'/g, '"');
         NFTURI = NFTURI.replace(/TokenID:/g, '');
         NFTURI = NFTURI.slice(2);
+        // if the string starts with 0 slice 1 more character off here
+        // used to get rid of extra 0 in the beginning of the string for token 10 ID
+        if (NFTURI.charAt(0) == '0'){
+            NFTURI = NFTURI.slice(1);
+        }
         NFTURI = JSON.stringify(JSON.parse(NFTURI),null,1);
         return NFTURI;
     };
