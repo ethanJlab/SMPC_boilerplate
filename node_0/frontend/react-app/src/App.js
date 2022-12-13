@@ -8,6 +8,7 @@ import army_logo from './assets/logo_usArmy_64.png';
 import ucf_logo from './assets/logo_ucf_312.png';
 import * as contractData from "./contractApi/chainIDs";
 
+
 //todo: add industry spacific NFTs to each chain
 function App() {
   const [parentSender, setParentSender] = useState("");
