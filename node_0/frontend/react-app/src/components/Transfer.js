@@ -11,6 +11,8 @@ import * as once from "async-once";
 import transfer_gif from '../assets/logo_blockchainConnection_Seq_64.gif';
 //import {setParentReceiver, setParentSender} from "../App";
 
+//TODO: Use ethers fallback provider to set fallback rpc links
+
 //test soldier data
 var testSoldier = {
     "FirstName": "John",
