@@ -14,13 +14,13 @@ export const avalancheID = 43113;
 export const fantomProxyAddress = '0x4a2369CcAd099f64802fb3e07b1107efa0F65Dca';
 export const fantomSenderAddress = '0x0397B1329267f80fbC28Fe7d902D74170d3E93D8';
 export const fantomRecieverAddress = '0x0966d9b13A69438F13106F37d2784428349577d3';
-export const fantomRPC = "https://rpc.testnet.fantom.network/";
+export const fantomRPC = "https://fantom-testnet.public.blastapi.io";
 export const fantomNFTAddress = '0x4659ed40Fd2025eB1357A0B96ff0D7088F42B570';
 
 export const binanceProxyAddress = '0x8187E7e848d95565BdC67F4ACd2A17B14692a616';
 export const binanceSenderAddress = '0x4a6c406995E6256065f481961F035B97942aCd5A';
 export const binanceRecieverAddress = '0x7FEB0e620fb77A1748A46709eDa61C1DB83DAAf2';
-export const binanceRPC = "https://data-seed-prebsc-1-s3.binance.org:8545";
+export const binanceRPC = "https://data-seed-prebsc-1-s1.binance.org:8545";
 export const binanceNFTAddress = '0xd59c3D341411d20CC716dDfC7A7c5282795D79C2';
 
 export const ethProxyAddress = '0x018caC4Fc42E620042a3394f7976511DF03e6A04';
@@ -32,7 +32,7 @@ export const ethNFTAddress = "0x0E4493082c65dEa4Be098fdF5452482e434d9FA4";
 export const polygonProxyAddress = '0x3dBEbc09a1F5D60e8412e4B9d66187f6Bc7DA0bE';
 export const polygonSenderAddress = '0x36d870F2EE0E1c69cadcf92A054F17Bf447C6745';
 export const polygonRecieverAddress = '0x1A9ae368Abe8e430819f301E0fD203FCF7B2821f';
-export const polygonRPC = "https://rpc-mumbai.maticvigil.com/";
+export const polygonRPC = "https://rpc-mumbai.maticvigil.com";
 export const polygonNFTAddress = '0x560B93E3CD7D5d2Fd6035dE236216b56D57F4c67';
 
 export const avalancheProxyAddress = '0x95823646eCf9b4A45fA3301B5420B2a88De8a8d6';
