@@ -12,6 +12,11 @@ import polygon_image from "../assets/polygon_image.png";
 import binance_image from "../assets/Binance_Logo.png";
 import avalanche_image from "../assets/avalanche_image.png";
 import error from "../assets/error.png";
+import healthCareGif from "../assets/cerAnim_AdultPediatric.gif";
+import militaryGif from "../assets/certAnim_Operator.gif";
+import financeGif from "../assets/cerAnim_DefenseFinancial.gif";
+import energyGif from "../assets/certAnim_UnitRangerTactics.gif";
+import airforceGif from "../assets/cerAnim_Airborne.gif";
 
 export function NftDisplay(props){
 
@@ -55,6 +60,34 @@ export function NftDisplay(props){
         return industry;        
     };
     
+
+    //function that will return the image associated with the Industry
+    var industryImage = getIndustryImage(props);
+    function getIndustryImage(props){
+        var industryImage;
+        switch (props.identifier){
+            case contractData.ethID:
+                industryImage = militaryGif;
+                break;
+            case contractData.fantomID:
+                industryImage = financeGif;
+                break;
+            case contractData.binanceID:
+                industryImage = healthCareGif;
+                break;
+            case contractData.polygonID:
+                industryImage = energyGif;
+                break;
+            case contractData.avalancheID:
+                industryImage = airforceGif;
+                break;
+            default:
+                industryImage = error;
+                break;
+        }
+        return industryImage;
+    };
+                
     // the props identifier will contain the chainID
 
     // get the blockchain logo based on chainID
@@ -147,7 +180,7 @@ export function NftDisplay(props){
         // simple hello world text
         <Container>
                 <Container className="h5">
-                <h1>Industry: {industry}</h1>
+                <h1>Industry: {industry} <Image style={{width: 50, height: 50}}src={industryImage}></Image></h1>
                 <Image src={blockchainLogo} roundedCircle width={60}/>
                 <Button onClick={() => displayRandomNFT().then((NFTURI) => {
                     setNFTURI(parseNFTURI(NFTURI));
