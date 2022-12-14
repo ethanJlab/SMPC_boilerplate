@@ -180,7 +180,7 @@ export function NftDisplay(props){
         // simple hello world text
         <Container>
                 <Container className="h5">
-                <h1>Industry: {industry} <Image style={{width: 50, height: 50}}src={industryImage}></Image></h1>
+                <h1>{industry} <Image style={{width: 50, height: 50}}src={industryImage}/></h1>
                 <Image src={blockchainLogo} roundedCircle width={60}/>
                 <Button onClick={() => displayRandomNFT().then((NFTURI) => {
                     setNFTURI(parseNFTURI(NFTURI));
