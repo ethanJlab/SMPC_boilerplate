@@ -127,7 +127,7 @@ export function NftDisplay(props){
         }
     }
     // set up contract instance using ethers
-    var provider = new ethers.providers.JsonRpcProvider(contractData.getRPC(props.identifier));
+    var provider = contractData.getProvider(props.identifier);
     var contract = new ethers.Contract(NFTAddress,NFTContractABI,provider);
 
     // function that takes in the NFT ID and returns the NFT URI

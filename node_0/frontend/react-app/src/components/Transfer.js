@@ -3,6 +3,7 @@ import "../scss/custom.scss";
 
 import DropItem from "./DropItem";
 import {ethers,BigNumber, Contract} from "ethers";
+import { BaseContract } from "essential-eth";
 
 import * as contractContact from "../contractApi/chainIDs";
 import {useState, useEffect, useCallback, useRef} from 'react';
@@ -60,8 +61,8 @@ var testSoldier = {
 
     //get the soldier data from the contract
     var [NFTContractAddress, NFTContractABI] = contractContact.getNFTContract(sender);
-    var NFTRPC = getRPC(sender);
-    var NFTContract = new ethers.Contract(NFTContractAddress, NFTContractABI, new ethers.providers.JsonRpcProvider(NFTRPC));
+    //var NFTRPC = getRPC(sender);
+    var NFTContract = new BaseContract(NFTContractAddress, NFTContractABI, contractContact.getProvider(sender));
 
     //call again to change the pulled NFT
     NFTContract.getMetaData(Math.floor(Math.random()*10)+1).then(function(result){
@@ -73,11 +74,11 @@ var testSoldier = {
 
     var [senderContractAddress, senderContractABI] = contractContact.getSenderContract(sender);
     var [recieverContractAddress, recieverContractABI] = contractContact.getRecieverContract(reciever);
-    var senderRPC = new ethers.providers.JsonRpcProvider(getRPC(sender));
-    var recieverRPC = new ethers.providers.JsonRpcProvider(getRPC(reciever));
+    var senderRPC = contractContact.getProvider(sender);
+    var recieverRPC = contractContact.getProvider(reciever);
 
-    var senderContract = new ethers.Contract(senderContractAddress,senderContractABI,senderRPC);
-    var recieverContract = new ethers.Contract(recieverContractAddress,recieverContractABI,recieverRPC);
+    var senderContract = new BaseContract(senderContractAddress,senderContractABI,senderRPC);
+    var recieverContract = new BaseContract(recieverContractAddress,recieverContractABI,recieverRPC);
     /*
     // listen for messages form sender 
     senderContract.on("NewMsg", (msg) => {
@@ -126,7 +127,7 @@ var testSoldier = {
     // fantom proxy setup
     var [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.fantomID);
     console.log("listening too proxy address: " + proxyAddress)
-    var proxyContractFantom = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.fantomRPC));
+    var proxyContractFantom = new BaseContract(proxyAddress,proxyAbi,contractContact.getProvider(contractContact.fantomID));
 
     //listen for proxyCall sent from proxy
 
@@ -140,7 +141,7 @@ var testSoldier = {
     // binance proxy setup
     [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.binanceID);
     console.log("listening too proxy address: " + proxyAddress)
-    var proxyContractBinance = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.binanceRPC));
+    var proxyContractBinance = new BaseContract(proxyAddress,proxyAbi,contractContact.getProvider(contractContact.binanceID));
 
     //listen for proxyCall sent from proxy
 
@@ -155,7 +156,7 @@ var testSoldier = {
     // eth proxy setup
     [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.ethID);
     console.log("listening too proxy address: " + proxyAddress)
-    var proxyContractEth = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.ethRPC));
+    var proxyContractEth = new BaseContract(proxyAddress,proxyAbi,contractContact.getProvider(contractContact.ethID));
 
     //listen for proxyCall sent from proxy
 
@@ -169,7 +170,8 @@ var testSoldier = {
     // polygon proxy setup
     [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.polygonID);
     console.log("listening too proxy address: " + proxyAddress);
-    var proxyContractPolygon = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.polygonRPC));
+    console.log(contractContact.getProvider(contractContact.polygonID));
+    var proxyContractPolygon = new BaseContract(proxyAddress,proxyAbi,contractContact.getProvider(contractContact.polygonID));
 
     //listen for proxyCall sent from proxy
 
@@ -182,7 +184,7 @@ var testSoldier = {
     // avalanche proxy setup
     [proxyAddress,proxyAbi] = contractContact.getProxyContract(contractContact.avalancheID);
     console.log("listening too proxy address: " + proxyAddress);
-    var proxyContractAvalanche = new ethers.Contract(proxyAddress,proxyAbi,new ethers.providers.JsonRpcProvider(contractContact.avalancheRPC));
+    var proxyContractAvalanche = new BaseContract(proxyAddress,proxyAbi,contractContact.getProvider(contractContact.avalancheID));
 
     //listen for proxyCall sent from proxy
 

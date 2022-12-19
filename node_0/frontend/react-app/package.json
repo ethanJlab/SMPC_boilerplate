@@ -9,6 +9,7 @@
     "async-once": "^2.0.0",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
+    "essential-eth": "^0.6.2",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
