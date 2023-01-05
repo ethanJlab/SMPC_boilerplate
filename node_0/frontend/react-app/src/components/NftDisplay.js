@@ -22,6 +22,7 @@ export function NftDisplay(props){
 
     const [NFTID, setNFTID] = useState("");
     const [NFTURI, setNFTURI] = useState("");
+    const [CONTRACT, setContract] = useState(""); 
     
 
     // handel the NFT ID input
@@ -129,6 +130,9 @@ export function NftDisplay(props){
     // set up contract instance using ethers
     var provider = contractData.getProvider(props.identifier);
     var contract = new ethers.Contract(NFTAddress,NFTContractABI,provider);
+    if (contract === ""){
+        setContract(contract);
+    }
 
     // function that takes in the NFT ID and returns the NFT URI
     async function getNFTURI(NFTID){

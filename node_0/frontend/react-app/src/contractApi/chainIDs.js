@@ -914,23 +914,56 @@ export function getProvider(chainID){
 	var providers;
 	switch (chainID) {
 		case fantomID:
-			providers = new FallthroughProvider(fantomRPC);
+			providers = new ethers.providers.JsonRpcProvider(fantomRPC[0]);
 			break;
 		case binanceID:
-			providers = new FallthroughProvider(binanceRPC);
+			providers = new ethers.providers.JsonRpcProvider(binanceRPC[0]);
 			break;
 		case polygonID:
-			providers = new FallthroughProvider(polygonRPC);
+			providers = new ethers.providers.JsonRpcProvider(polygonRPC[0]);
 			break;
 		case avalancheID:
-			providers = new FallthroughProvider(avalancheRPC);
+			providers = new ethers.providers.JsonRpcProvider(avalancheRPC[0]);
 			break;
 		case ethID:
-			providers = new FallthroughProvider(ethRPC);
+			providers = new ethers.providers.JsonRpcProvider(ethRPC[2]);
+			console.log("eth provider " +  checkConnection(ethID));
 			break;
 		default:
 			console.log("Invalid Chain ID");
 			break;
 	}
 	return providers;
+}
+
+async function checkConnection(chainID){
+	var providers;
+	var result;
+	switch (chainID) {
+		case fantomID:
+			providers = new ethers.providers.JsonRpcProvider(fantomRPC[0]);
+			result = await providers.getBlockNumber();
+			break;
+		case binanceID:
+			providers = new ethers.providers.JsonRpcProvider(binanceRPC[0]);
+			result = await providers.getBlockNumber();
+			break;
+		case polygonID:
+			providers = new ethers.providers.JsonRpcProvider(polygonRPC[0]);
+			result = await providers.getBlockNumber();
+			break;
+		case avalancheID:
+			providers = new ethers.providers.JsonRpcProvider(avalancheRPC[0]);
+			result = await providers.getBlockNumber();
+			break;
+		case ethID:
+			providers = new ethers.providers.JsonRpcProvider(ethRPC[2]);
+			result = await providers.getBlockNumber();
+			break;
+		default:
+			console.log("Invalid Chain ID");
+			break;
+	}
+	return result;
+			
 }
